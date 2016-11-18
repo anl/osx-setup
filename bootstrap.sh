@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Install Xcode
 if test xcode-select >&- && xpath=$(xcode-select --print-path) && test -d "$xpath" && test -x "$xpath" ; then
     echo 'Xcode already configured'
 else
@@ -11,4 +12,5 @@ else
     exit
 fi
 
-
+# Configure git:
+#/usr/bin/git config --global --edit
