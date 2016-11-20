@@ -1,0 +1,11 @@
+---
+- name: Install and configure OS X system
+  hosts: localhost
+  become: no
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Tap casks
+      homebrew_tap:
+        name: Caskroom/cask
