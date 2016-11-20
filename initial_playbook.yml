@@ -9,3 +9,7 @@
     - name: Tap casks
       homebrew_tap:
         name: Caskroom/cask
+
+    - name: Install casks
+      homebrew_cask:
+        name: firefox
