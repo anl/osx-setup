@@ -12,4 +12,7 @@
 
     - name: Install casks
       homebrew_cask:
-        name: firefox
+        name: "{{ item }}"
+      with_items:
+        - firefox
+        - little-snitch
