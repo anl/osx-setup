@@ -16,3 +16,4 @@
       with_items:
         - firefox
         - little-snitch
+        - micro-snitch
