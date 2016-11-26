@@ -28,3 +28,8 @@
         name: "{{ item }}"
       with_items:
         - mas
+
+    - name: Install App Store apps
+      command: "/usr/local/bin/mas install {{ item }}"
+      with_items:
+        - 451907568 # Paprika Recipe Manager
