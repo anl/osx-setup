@@ -22,6 +22,7 @@
         - microsoft-office
         - garmin-express
         - anki
+        - skype
 
     - name: Install brew packages
       homebrew:
