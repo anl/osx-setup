@@ -23,6 +23,7 @@
         - garmin-express
         - anki
         - skype
+        - docker
 
     - name: Install brew packages
       homebrew:
