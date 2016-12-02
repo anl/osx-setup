@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Install Xcode
+# Install Xcode - test for installation from
+# https://apple.stackexchange.com/questions/219507/best-way-to-check-in-bash-if-command-line-tools-are-installed
 if test xcode-select >&- && xpath=$(xcode-select --print-path) && test -d "$xpath" && test -x "$xpath" ; then
     echo 'Xcode already configured'
 else
