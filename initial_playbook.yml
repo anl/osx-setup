@@ -35,3 +35,4 @@
       command: "/usr/local/bin/mas install {{ item }}"
       with_items:
         - 451907568 # Paprika Recipe Manager
+        - 428846772 # Howler Timer
