@@ -8,7 +8,10 @@
   tasks:
     - name: Tap casks
       homebrew_tap:
-        name: Caskroom/cask
+        name: "{{ item }}"
+      with_items:
+        - Caskroom/cask
+        - homebrew/emacs
 
     - name: Install casks
       homebrew_cask:
@@ -29,7 +32,9 @@
       homebrew:
         name: "{{ item }}"
       with_items:
+        - emacs
         - mas
+        - yaml-mode
 
     - name: Install App Store apps
       command: "/usr/local/bin/mas install {{ item }}"
