@@ -29,6 +29,7 @@
         - micro-snitch
         - microsoft-office
         - skype
+        - visual-studio-code
 
     - name: Install brew packages
       homebrew:
