@@ -17,17 +17,17 @@
       homebrew_cask:
         name: "{{ item }}"
       with_items:
+        - anki
+        - docker
         - firefox
+        - flux
+        - garmin-express
+        - google-chrome
         - iterm2
         - little-snitch
         - micro-snitch
-        - flux
-        - google-chrome
         - microsoft-office
-        - garmin-express
-        - anki
         - skype
-        - docker
 
     - name: Install brew packages
       homebrew:
