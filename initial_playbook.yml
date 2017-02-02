@@ -36,6 +36,7 @@
         name: "{{ item }}"
       with_items:
         - emacs
+        - exercism
         - mas
         - rbenv
         - ruby-build
