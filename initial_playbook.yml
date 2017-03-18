@@ -38,9 +38,11 @@
       homebrew:
         name: "{{ item }}"
       with_items:
+        - ack
         - emacs
         - exercism
         - gradle
+        - hg
         - mas
         - rbenv
         - ruby-build
