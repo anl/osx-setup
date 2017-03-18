@@ -33,6 +33,7 @@
         - microsoft-office
         - skype
         - visual-studio-code
+        - wireshark
 
     - name: Install brew packages
       homebrew:
