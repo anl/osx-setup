@@ -49,6 +49,7 @@
         - rbenv
         - ruby-build
         - scala
+        - tree
         - yaml-mode
 
     - name: Install App Store apps
