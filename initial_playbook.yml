@@ -10,6 +10,7 @@
       homebrew_tap:
         name: "{{ item }}"
       with_items:
+        - buo/cask-upgrade
         - Caskroom/cask
         - homebrew/emacs
 
