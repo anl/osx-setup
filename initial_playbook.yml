@@ -47,6 +47,7 @@
         - gradle
         - groovy
         - hg
+        - hugo
         - mas
         - rbenv
         - ruby-build
