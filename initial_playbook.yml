@@ -58,6 +58,6 @@
     - name: Install App Store apps
       command: "/usr/local/bin/mas install {{ item }}"
       with_items: # Find installed items with "mas list"
-        - 403388562 # Transmit
-        - 428846772 # Howler Timer
-        - 451907568 # Paprika Recipe Manager
+        - 403388562  # Transmit
+        - 428846772  # Howler Timer
+        - 1303222628 # Paprika Recipe Manager
