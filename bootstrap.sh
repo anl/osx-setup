@@ -40,4 +40,4 @@ mkdir -p ${HOME}/virtualenvs
 /usr/local/bin/virtualenv ${HOME}/virtualenvs/ansible
 ${HOME}/virtualenvs/ansible/bin/pip install -r ansible-requirements.txt
 
-${HOME}/virtualenvs/ansible/bin/ansible-playbook -i 127.0.0.1, initial_playbook.yml
+${HOME}/virtualenvs/ansible/bin/ansible-playbook -i 127.0.0.1, initial_playbook.yml -K

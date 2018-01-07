@@ -5,6 +5,12 @@
   connection: local
   gather_facts: no
 
+  vars:
+    pkg_urls:
+      - url: "http://tug.org/cgi-bin/mactex-download/MacTeX.pkg"
+        checksum: "sha1:d2a8383dcce32c5d4f974862492d240166fe3882"
+        creates: /usr/local/texlive/2017
+
   tasks:
     - name: Tap casks
       homebrew_tap:
@@ -61,3 +67,24 @@
         - 403388562  # Transmit
         - 428846772  # Howler Timer
         - 1303222628 # Paprika Recipe Manager
+
+    - name: Stat items installed from pkgs
+      stat:
+        path: "{{ item.creates }}"
+      register: pkg_stat
+      with_items: "{{ pkg_urls }}"
+
+    - name: Download pkgs
+      get_url:
+        url: "{{ item.item.url }}"
+        dest: "/private/tmp/{{ item.item.url | basename }}"
+        checksum: "{{ item.item.checksum }}"
+      with_items: "{{ pkg_stat.results }}"
+
+    - name: Install pkgs
+      command: "installer -pkg /private/tmp/{{ item.item.url | basename }} -target /"
+      args:
+        creates: "{{ item.item.creates }}"
+      become: yes
+      when: not item.stat.exists
+      with_items: "{{ pkg_stat.results }}"
