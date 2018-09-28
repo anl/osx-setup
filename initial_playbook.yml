@@ -17,7 +17,7 @@
         name: "{{ item }}"
       with_items:
         - buo/cask-upgrade
-        - Caskroom/cask
+        - homebrew/cask
         - homebrew/emacs
 
     - name: Install casks
