@@ -75,15 +75,26 @@
       register: pkg_stat
       with_items: "{{ pkg_urls }}"
 
+    - name: Define pkgs_dir
+      set_fact:
+        pkgs_dir: "{{ lookup('env', 'HOME') }}/pkgs"
+
+    - name: Create package cache directory
+      file:
+        path: "{{ pkgs_dir }}"
+        state: directory
+        mode: 0700
+
     - name: Download pkgs
       get_url:
         url: "{{ item.item.url }}"
-        dest: "/private/tmp/{{ item.item.url | basename }}"
+        dest: "{{ pkgs_dir }}/{{ item.item.url | basename }}"
         checksum: "{{ item.item.checksum }}"
+      when: not item.stat.exists
       with_items: "{{ pkg_stat.results }}"
 
     - name: Install pkgs
-      command: "installer -pkg /private/tmp/{{ item.item.url | basename }} -target /"
+      command: "installer -pkg {{ pkgs_dir }}/{{ item.item.url | basename }} -target /"
       args:
         creates: "{{ item.item.creates }}"
       become: yes
