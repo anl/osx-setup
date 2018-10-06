@@ -22,27 +22,26 @@
 
     - name: Install casks
       homebrew_cask:
-        name: "{{ item }}"
-      with_items:
-        - adobe-creative-cloud
-        - anki
-        - docker
-        - firefox
-        - flux
-        - freedome
-        - garmin-express
-        - google-chrome
-        - intellij-idea
-        - iterm2
-        - java
-        - little-snitch
-        - mendeley-desktop
-        - micro-snitch
-        - microsoft-office
-        - minikube
-        - skype
-        - visual-studio-code
-        - wireshark
+        name:
+          - adobe-creative-cloud
+          - anki
+          - docker
+          - firefox
+          - flux
+          - freedome
+          - garmin-express
+          - google-chrome
+          - intellij-idea
+          - iterm2
+          - java
+          - little-snitch
+          - mendeley-desktop
+          - micro-snitch
+          - microsoft-office
+          - minikube
+          - skype
+          - visual-studio-code
+          - wireshark
 
     - name: Install brew packages
       homebrew:
