@@ -48,6 +48,7 @@
         name: "{{ item }}"
       with_items:
         - ack
+        - bats
         - emacs
         - exercism
         - go
