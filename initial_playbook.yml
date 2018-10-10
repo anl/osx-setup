@@ -46,23 +46,22 @@
 
     - name: Install brew packages
       homebrew:
-        name: "{{ item }}"
-      with_items:
-        - ack
-        - bats
-        - emacs
-        - exercism
-        - go
-        - gradle
-        - groovy
-        - hg
-        - hugo
-        - mas
-        - rbenv
-        - ruby-build
-        - scala
-        - tree
-        - yaml-mode
+        name:
+          - ack
+          - bats
+          - emacs
+          - exercism
+          - go
+          - gradle
+          - groovy
+          - hg
+          - hugo
+          - mas
+          - rbenv
+          - ruby-build
+          - scala
+          - tree
+          - yaml-mode
 
     - name: Install App Store apps
       command: "/usr/local/bin/mas install {{ item }}"
