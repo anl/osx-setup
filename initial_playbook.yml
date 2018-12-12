@@ -5,12 +5,6 @@
   connection: local
   gather_facts: no
 
-  vars:
-    pkg_urls:
-      - url: "http://tug.org/cgi-bin/mactex-download/MacTeX.pkg"
-        checksum: "sha1:d2a8383dcce32c5d4f974862492d240166fe3882"
-        creates: /usr/local/texlive/2017
-
   tasks:
     - name: Tap casks
       homebrew_tap:
@@ -24,7 +18,6 @@
       homebrew_cask:
         name:
           - adobe-creative-cloud
-          - anki
           - docker
           - firefox
           - flux
@@ -42,26 +35,19 @@
           - slack
           - skype
           - visual-studio-code
-          - wireshark
 
     - name: Install brew packages
       homebrew:
         name:
           - ack
-          - bats
           - emacs
-          - exercism
-          - go
           - gradle
-          - groovy
           - hg
           - hugo
           - mas
           - rbenv
           - ruby-build
           - scala
-          - tree
-          - yaml-mode
 
     - name: Install App Store apps
       command: "/usr/local/bin/mas install {{ item }}"
@@ -70,35 +56,3 @@
         - 428846772   # Howler Timer
         - 1295203466  # Microsoft Remote Desktop
         - 1303222628  # Paprika Recipe Manager
-
-    - name: Stat items installed from pkgs
-      stat:
-        path: "{{ item.creates }}"
-      register: pkg_stat
-      with_items: "{{ pkg_urls }}"
-
-    - name: Define pkgs_dir
-      set_fact:
-        pkgs_dir: "{{ lookup('env', 'HOME') }}/pkgs"
-
-    - name: Create package cache directory
-      file:
-        path: "{{ pkgs_dir }}"
-        state: directory
-        mode: 0700
-
-    - name: Download pkgs
-      get_url:
-        url: "{{ item.item.url }}"
-        dest: "{{ pkgs_dir }}/{{ item.item.url | basename }}"
-        checksum: "{{ item.item.checksum }}"
-      when: not item.stat.exists
-      with_items: "{{ pkg_stat.results }}"
-
-    - name: Install pkgs
-      command: "installer -pkg {{ pkgs_dir }}/{{ item.item.url | basename }} -target /"
-      args:
-        creates: "{{ item.item.creates }}"
-      become: yes
-      when: not item.stat.exists
-      with_items: "{{ pkg_stat.results }}"

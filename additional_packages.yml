@@ -1,0 +1,60 @@
+---
+- name: Install additional packages
+  hosts: localhost
+  become: no
+  connection: local
+  gather_facts: no
+
+  vars:
+    pkg_urls:
+      - url: "http://tug.org/cgi-bin/mactex-download/MacTeX.pkg"
+        checksum: "sha1:d2a8383dcce32c5d4f974862492d240166fe3882"
+        creates: /usr/local/texlive/2017
+
+  tasks:
+    - name: Install casks
+      homebrew_cask:
+        name:
+          - anki
+          - wireshark
+
+    - name: Install brew packages
+      homebrew:
+        name:
+          - bats
+          - exercism
+          - go
+          - groovy
+          - tree
+
+    - name: Stat items installed from pkgs
+      stat:
+        path: "{{ item.creates }}"
+      register: pkg_stat
+      with_items: "{{ pkg_urls }}"
+
+    - name: Define pkgs_dir
+      set_fact:
+        pkgs_dir: "{{ lookup('env', 'HOME') }}/pkgs"
+
+    - name: Create package cache directory
+      file:
+        path: "{{ pkgs_dir }}"
+        state: directory
+        mode: 0700
+
+    - name: Download pkgs
+      get_url:
+        url: "{{ item.item.url }}"
+        dest: "{{ pkgs_dir }}/{{ item.item.url | basename }}"
+        checksum: "{{ item.item.checksum }}"
+      when: not item.stat.exists
+      with_items: "{{ pkg_stat.results }}"
+
+    - name: Install pkgs
+      command: "installer -pkg {{ pkgs_dir }}/{{ item.item.url | basename }} -target /"
+      args:
+        creates: "{{ item.item.creates }}"
+      become: yes
+      when: not item.stat.exists
+      with_items: "{{ pkg_stat.results }}"
